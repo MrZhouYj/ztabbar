@@ -12,9 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -29,13 +26,19 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  late TabController tabController;
+  List tabs = ["你好"];
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: tabs.length, vsync: this);
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter = Calculator().addOne(_counter);
-    });
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,24 +47,36 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          ExtendedTabBar(
+              isScrollable: tabs.length > 4,
+              labelColor: Colors.black,
+              height: 50,
+              backgroundColor: Colors.yellow,
+              unselectedLabelColor: Colors.white,
+              controller: tabController,
+              tabs: tabs.map((e) => ExtendedTab(text: e)).toList()),
+          Expanded(
+            child: ExtendedTabBarView(
+                controller: tabController,
+                children: tabs
+                    .map((e) => Center(
+                          child: Text(e),
+                        ))
+                    .toList()),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: () {
+          setState(() {
+            tabs.add("你好");
+            tabController.dispose();
+            tabController = TabController(length: tabs.length, vsync: this);
+          });
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

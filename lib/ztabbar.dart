@@ -1,7 +1,7 @@
 library ztabbar;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 2;
-}
+
+
+export 'src/tabbar.dart';
+export 'src/page_view.dart';
+export 'src/tab_view.dart';
