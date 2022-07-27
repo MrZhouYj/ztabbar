@@ -1030,7 +1030,7 @@ class ExtendedTab extends StatelessWidget {
   final double? height;
 
   Widget _buildLabelText() {
-    return child ?? Text(text!, softWrap: false, overflow: TextOverflow.fade);
+    return child ?? Text(text!);
   }
 
   @override
@@ -1064,9 +1064,9 @@ class ExtendedTab extends StatelessWidget {
       height: scrollDirection == Axis.horizontal
           ? height ?? calculatedHeight
           : null,
-      width: scrollDirection == Axis.horizontal
-          ? null
-          : height ?? calculatedHeight,
+      /*width: scrollDirection == Axis.horizontal*/
+      /*    ? null                               */
+      /*    : height ?? calculatedHeight,        */
       child: Center(
         child: label,
       ),
