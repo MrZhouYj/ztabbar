@@ -551,7 +551,7 @@ class ExtendedTabBar extends StatefulWidget implements PreferredSizeWidget {
 
   final bool foregroundIndicator;
 
-  final List<ExtendedTab> tabs;
+  final List<Tab> tabs;
 
   final TabController? controller;
 
@@ -600,7 +600,7 @@ class ExtendedTabBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize {
     for (final Widget item in tabs) {
-      if (item is ExtendedTab) {
+      if (item is Tab) {
         final ExtendedTab tab = item;
         if ((tab.text != null || tab.child != null) && tab.icon != null)
           return Size.fromHeight(_kTextAndIconTabHeight + indicatorWeight);
