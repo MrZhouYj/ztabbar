@@ -1069,7 +1069,6 @@ class ExtendedTab extends StatelessWidget {
           : height ?? calculatedHeight,
       child: Center(
         child: label,
-        widthFactor: 1.0,
       ),
     );
   }

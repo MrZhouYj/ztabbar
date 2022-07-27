@@ -51,10 +51,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         children: [
           ExtendedTabBar(
               isScrollable: tabs.length > 4,
-              labelColor: Colors.black,
               height: 50,
+              labelColor: Colors.black,
               backgroundColor: Colors.yellow,
-              unselectedLabelColor: Colors.white,
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
               controller: tabController,
               tabs: tabs.map((e) => ExtendedTab(text: e)).toList()),
           Expanded(
@@ -71,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            tabs.add("你好");
+            tabs.add("测四");
             tabController.dispose();
             tabController = TabController(length: tabs.length, vsync: this);
           });
