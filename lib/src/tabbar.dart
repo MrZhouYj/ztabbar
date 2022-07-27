@@ -601,7 +601,7 @@ class ExtendedTabBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize {
     for (final Widget item in tabs) {
       if (item is Tab) {
-        final ExtendedTab tab = item;
+        final Tab tab = item;
         if ((tab.text != null || tab.child != null) && tab.icon != null)
           return Size.fromHeight(_kTextAndIconTabHeight + indicatorWeight);
       }
@@ -998,86 +998,5 @@ class _ExtendedTabBarState extends State<ExtendedTabBar> {
 
     return Container(
         height: widget.height, color: widget.backgroundColor, child: tabBar);
-  }
-}
-
-class ExtendedTab extends StatelessWidget {
-  const ExtendedTab({
-    Key? key,
-    this.text,
-    this.icon,
-    this.iconMargin = const EdgeInsets.only(bottom: 10.0),
-    this.child,
-    this.scrollDirection,
-    this.size,
-    this.height,
-  })  : assert(text != null || child != null || icon != null),
-        assert(text == null || child == null),
-        super(key: key);
-
-  final String? text;
-
-  final Widget? child;
-
-  final Widget? icon;
-
-  final EdgeInsetsGeometry iconMargin;
-
-  final Axis? scrollDirection;
-
-  final double? size;
-
-  final double? height;
-
-  Widget _buildLabelText() {
-    return child ?? Text(text!);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    assert(debugCheckHasMaterial(context));
-
-    final double calculatedHeight;
-    Widget? label;
-    if (icon == null) {
-      calculatedHeight = size ?? _kTabHeight;
-      label = _buildLabelText();
-    } else if (text == null && child == null) {
-      calculatedHeight = size ?? _kTabHeight;
-      label = icon;
-    } else {
-      calculatedHeight = size ?? _kTextAndIconTabHeight;
-      label = Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            child: icon,
-            margin: iconMargin,
-          ),
-          _buildLabelText(),
-        ],
-      );
-    }
-
-    return SizedBox(
-      height: scrollDirection == Axis.horizontal
-          ? height ?? calculatedHeight
-          : null,
-      /*width: scrollDirection == Axis.horizontal*/
-      /*    ? null                               */
-      /*    : height ?? calculatedHeight,        */
-      child: Center(
-        child: label,
-      ),
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text, defaultValue: null));
-    properties
-        .add(DiagnosticsProperty<Widget>('icon', icon, defaultValue: null));
   }
 }

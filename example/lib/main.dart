@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late TabController tabController;
-  List tabs = ["你好"];
+  List tabs = ["你好",'我是四个字'];
   @override
   void initState() {
     super.initState();
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ),
               unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
               controller: tabController,
-              tabs: tabs.map((e) => ExtendedTab(text: e)).toList()),
+              tabs: tabs.map((e) => Tab(text: e)).toList()),
           Expanded(
             child: ExtendedTabBarView(
                 controller: tabController,
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            tabs.add("测四");
+            tabs.add("测四二合一");
             tabController.dispose();
             tabController = TabController(length: tabs.length, vsync: this);
           });
