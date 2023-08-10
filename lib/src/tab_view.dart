@@ -301,7 +301,7 @@ class _ExtendedTabBarViewState extends State<ExtendedTabBarView> {
     if (notification.depth == 0 &&
         (_disallowGlow(notification.leading, _ancestor) ||
             _disallowGlow(notification.leading, _child))) {
-      notification.disallowGlow();
+      notification.disallowIndicator();
       return true;
     }
     return false;
